@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # added by me
     'rest_framework',
+    'products',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +125,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#added by me to tell django where to upload
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR/'media/'
