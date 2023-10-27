@@ -72,20 +72,17 @@ class ProductImageDetail(APIView):
         
 @api_view(['POST'])
 def search(request):
-    """Add search functionality"""
+    """Add search functionality by product name category price"""
     query = request.data.get('query', '')
     min_price = request.data.get('min_price', None)
     max_price = request.data.get('max_price', None)
     category = request.data.get('category', '')
 
-    # Create an initial query that matches all products
     base_query = Q()
 
-    # Add conditions for search terms if provided
     if query:
         base_query &= Q(name__icontains=query) | Q(description__icontains=query)
     
-    # Add conditions for price range and category if provided
     if min_price is not None:
         base_query &= Q(price__gte=min_price)
     if max_price is not None:
@@ -93,7 +90,6 @@ def search(request):
     if category:
         base_query &= Q(category__name=category)    
 
-    # Execute the final query
     products = Product.objects.filter(base_query)
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
