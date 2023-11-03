@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+#added by me
+AUTH_USER_MODEL = 'order.CustomUser'
 
 # Application definition
 
@@ -40,8 +41,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # added by me
     'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
+    'djoser',
     'products',
+    'order',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #added by me
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -129,3 +143,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #added by me to tell django where to upload
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media/'
+
+#added by me Add the origins (domains) that are allowed to make requests to your API
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000", 
+    "http://127.0.0.1:8000",
+]
+
+
+
+
+
