@@ -1,0 +1,59 @@
+.hero {
+  margin-top: 9.2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 60rem;
+  position: relative;
+}
+.shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.shapes-ellipse {
+  position: absolute;
+  top: 15%;
+  right: 0;
+}
+.shapes-star {
+  width: 30rem;
+}
+.text {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.text h1 {
+  font-size: 3.5rem;
+  letter-spacing: -1px;
+  line-height: 0.2;
+}
+
+.text h3 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.text p {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  width: 80%;
+}
+
+.img {
+  position: relative;
+}
+.img img {
+  position: absolute;
+}
+.img img:first-child {
+  top: 0%;
+  left: 10%;
+}
+
+.img img:last-child {
+  top: 30%;
+  left: 40%;
+}
