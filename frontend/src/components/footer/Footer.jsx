@@ -13,10 +13,10 @@ function Footer() {
           <div className={styles.info}>
             <Logo />
             <p>
-              we're more than just an e-commerce store; we're a passionate team
-              dedicated to bringing you quality products that enhance your life.
-              Our journey began with a simple belief: that every purchase should
-              make you smile.
+              we&apos;re more than just an e-commerce store; we're a passionate
+              team dedicated to bringing you quality products that enhance your
+              life. Our journey began with a simple belief: that every purchase
+              should make you smile.
             </p>
           </div>
           <div className={styles.link}>
