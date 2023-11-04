@@ -1,11 +1,11 @@
-import { axios } from "./../configs/configs";
+import { apiClient } from "./../configs/configs";
 
 async function getAll() {
-  const resp = axios.get("/products");
-  console.log(resp);
+  const response = await apiClient.get("/products/");
+  return response.data;
 }
 
-function getBySlug(slug) {
+function getBySlug(category, slug) {
   return slug;
 }
 
