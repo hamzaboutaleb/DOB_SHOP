@@ -59,11 +59,13 @@ from .models import Order, OrderItem
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from products.models import Product  # Import the Product model
+from products.models import Product
 from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAuthenticated
 
 class OrderListView(ListAPIView):
     """list order"""
+    permission_classes = [IsAuthenticated]
     serializer_class = OrderSerializer
 
     def get_queryset(self):
@@ -73,6 +75,7 @@ class OrderListView(ListAPIView):
 
 class AddToCartView(APIView):
     """add items to order"""
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         product_id = request.data.get('product')  # Get the product ID from the request data
         quantity = request.data.get('quantity')
@@ -105,6 +108,8 @@ class AddToCartView(APIView):
 
 
 class RemoveFromCartView(APIView):
+    """delete items from the cart"""
+    permission_classes = [IsAuthenticated]
     def delete(self, request, order_item_id):
         try:
             order_item = OrderItem.objects.get(id=order_item_id)
@@ -122,4 +127,17 @@ class RemoveFromCartView(APIView):
 
         return Response({'message': 'Product removed from the cart'}, status=status.HTTP_204_NO_CONTENT)
 
+class CheckoutView(APIView):
+    """checkout view using a Cash on Delivery"""
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        user = self.request.user
+        order = Order.objects.filter(user=user, status='pending').first()
 
+        if not order:
+            return Response({'message': 'No pending order to checkout'}, status=status.HTTP_400_BAD_REQUEST)
+
+        order.status = 'completed'
+        order.save()
+
+        return Response({'message': 'Checkout successful'}, status=status.HTTP_200_OK)
