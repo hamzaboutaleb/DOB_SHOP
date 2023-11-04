@@ -5,7 +5,6 @@ import qualityIcon from "./../../../../assets/svg/quality-icon.svg";
 import shoppingIcon from "./../../../../assets/svg/icon-shopping.svg";
 import globalIcon from "./../../../../assets/svg/icon-globe.svg";
 function Features() {
-  console.log(styles);
   return (
     <section>
       <div className="container">

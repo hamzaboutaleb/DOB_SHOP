@@ -2,6 +2,8 @@ import "./assets/styles/global.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
 import Home from "./pages/Home/Home";
+import { useEffect } from "react";
+import product from "./services/productsApi.js";
 
 const route = createBrowserRouter([
   {
@@ -17,6 +19,9 @@ const route = createBrowserRouter([
 ]);
 
 function App() {
+  useEffect(() => {
+    product.getAll();
+  }, []);
   return <RouterProvider router={route} />;
 }
 
