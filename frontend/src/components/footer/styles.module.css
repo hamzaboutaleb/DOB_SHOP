@@ -1,0 +1,44 @@
+.footer {
+  padding: 3.2rem;
+  background-color: #cecece;
+}
+.box {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+}
+.info p {
+  font-size: 1.6rem;
+  width: 80%;
+  line-height: 1.6;
+}
+.link h3,
+.contact h3 {
+  font-size: 2.2rem;
+  font-weight: 500;
+}
+.link ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.link a {
+  color: #3b3b3b;
+  font-size: 1.6rem;
+  text-decoration: none;
+}
+.contact {
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.contact a {
+  text-decoration: none;
+  color: #000;
+}
+.contactSocialNet {
+  display: flex;
+  gap: 12px;
+}

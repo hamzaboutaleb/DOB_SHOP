@@ -144,13 +144,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media/'
 
-#added by me Add the origins (domains) that are allowed to make requests to your API
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000", 
-    "http://127.0.0.1:8000",
-]
-
-
-
-
-
+CORS_ORIGIN_ALLOW_ALL = True  

@@ -1,0 +1,15 @@
+.section {
+  background-color: var(--primary-color-orange-2);
+}
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  margin-bottom: 8.2rem;
+}
+.title {
+  font-weight: 500;
+  font-size: 3.2rem;
+  color: #180907;
+  margin-bottom: 9.2rem;
+}

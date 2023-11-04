@@ -1,0 +1,11 @@
+.logo {
+  font-size: 3.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.logo span:first-child {
+  color: var(--primary-color-green);
+}
+.logo span:last-child {
+  color: var(--primary-color-orange);
+}
