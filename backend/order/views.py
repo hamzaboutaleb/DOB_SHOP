@@ -28,14 +28,24 @@ def user_login(request):
         username = request.data.get('username')
         password = request.data.get('password')
 
+        if not username:
+            return Response({'error': 'Username is required'}, status=status.HTTP_400_BAD_REQUEST)
+        if not password:
+            return Response({'error': 'Password is required'}, status=status.HTTP_400_BAD_REQUEST)
+
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
             token, _ = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key}, status=status.HTTP_200_OK)
+            return Response({'username': user.username, 'token': token.key}, status=status.HTTP_200_OK)
 
-        return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        try:
+            user = CustomUser.objects.get(username=username)
+            return Response({'error': 'Wrong password'}, status=status.HTTP_401_UNAUTHORIZED)
+        except CustomUser.DoesNotExist:
+            return Response({'error': 'Wrong username'}, status=status.HTTP_401_UNAUTHORIZED)
+        #return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
         
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
