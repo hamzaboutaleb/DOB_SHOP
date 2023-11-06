@@ -5,8 +5,9 @@ async function getAll() {
   return response.data;
 }
 
-function getBySlug(category, slug) {
-  return slug;
+async function getBySlug(slug) {
+  const response = await apiClient.get(`/products/${slug}`);
+  return response.data;
 }
 
 export default {

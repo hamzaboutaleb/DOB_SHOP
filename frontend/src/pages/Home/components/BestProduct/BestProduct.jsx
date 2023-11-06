@@ -1,6 +1,5 @@
-import Link from "../../../../components/link/Link";
 import ProductItem from "../../../../components/productItem/ProductItem";
-import { useProducts } from "../../../../contexts/useProduct";
+import { useProducts } from "../../../../hooks/useProduct";
 import styles from "./styles.module.css";
 
 function BestProduct() {
@@ -16,9 +15,9 @@ function BestProduct() {
             <ProductItem key={product.id} product={product} />
           ))}
         </div>
-        <div className="center">
+        {/* <div className="center">
           <Link href="#">See More Products &rarr;</Link>
-        </div>
+        </div> */}
       </div>
     </section>
   );

@@ -3,5 +3,10 @@
  * @example ['btn', 'block] => 'btn block'
  */
 export function toClassName(classesList, styles) {
-  return classesList.map((classEl) => styles[classEl]).join(" ");
+  return classesList
+    .map((classEl) => {
+      if (classEl in styles) return styles[classEl];
+      return classEl;
+    })
+    .join(" ");
 }
