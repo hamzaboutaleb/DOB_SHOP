@@ -1,0 +1,13 @@
+.text {
+  font-size: 1.6rem;
+  padding: 4px 12px;
+}
+.text.primary {
+  color: #3b7ada;
+}
+.text.error {
+  color: #e13f4c;
+}
+.text.success {
+  color: #159f5f;
+}

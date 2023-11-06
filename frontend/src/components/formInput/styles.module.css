@@ -1,0 +1,26 @@
+.input {
+  margin-block: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input label {
+  display: block;
+  font-size: 14px;
+}
+.input input {
+  border: 0;
+  background-color: var(--grey-color-0);
+  padding: 12px 16px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.input input:focus {
+  outline: none;
+  box-shadow: 0 1px 1px var(--primary-color-orange);
+  border-radius: 4px 4px 0 0;
+}
