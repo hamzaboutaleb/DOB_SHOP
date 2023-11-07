@@ -5,12 +5,12 @@ import Button from "../../components/button/Button";
 import Alert from "../../components/alert/Alert";
 import Text from "../../components/text/Text";
 import Form from "../../components/form/Form";
-import { validatePassword, validateUsername } from "./utlis/validation";
-import { useInput } from "./hooks/useInput";
+import { longerThan, required } from "./utlis/validation";
 import { useLogin } from "./hooks/useLogin";
+import { useInput } from "../../hooks/useInput";
 function Login() {
-  const username = useInput("", validateUsername);
-  const password = useInput("", validatePassword);
+  const username = useInput("", required);
+  const password = useInput("", longerThan(3));
   const { isLoading, error, onSubmit } = useLogin(username, password);
   return (
     <Form onSubmit={onSubmit}>
@@ -29,7 +29,7 @@ function Login() {
       </FormInput>
       <FormInput
         htmlFor="Password"
-        type="text"
+        type="password"
         placeholder="Password"
         name="Password"
         state={password}
@@ -49,7 +49,7 @@ function Login() {
       </Button>
       <p className={`${styles.text} text-center`}>
         don&apos;t have an account ?{" "}
-        <Link to="#" className={styles.link}>
+        <Link to="/register" className={styles.link}>
           Sign in
         </Link>
       </p>
