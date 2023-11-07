@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import AuthLayout from "./layouts/AuthLayout";
 import Login from "./pages/Login/Login";
 import GuestRoute from "./components/authComponents/GuestRoute";
+import Register from "./pages/Register/Register";
 
 const route = createBrowserRouter([
   {
@@ -29,8 +30,12 @@ const route = createBrowserRouter([
         ),
       },
       {
-        path: "register",
-        element: <h1>Register</h1>,
+        path: "/register",
+        element: (
+          <GuestRoute>
+            <Register />
+          </GuestRoute>
+        ),
       },
     ],
   },

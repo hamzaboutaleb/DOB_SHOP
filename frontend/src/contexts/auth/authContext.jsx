@@ -17,7 +17,6 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    console.log("mus run once");
     if (isLoggedIn()) {
       setIsAuth(true);
     }

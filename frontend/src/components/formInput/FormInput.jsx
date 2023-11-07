@@ -12,9 +12,9 @@ function FormInput({
     <div className={styles.input}>
       <label htmlFor={htmlFor}>{name}</label>
       <input
-        onChange={state.onChange}
-        onBlur={state.onBlur}
-        value={state.value}
+        onChange={state?.onChange}
+        onBlur={state?.onBlur}
+        value={state?.value}
         type={type}
         placeholder={placeholder}
         id={htmlFor}
