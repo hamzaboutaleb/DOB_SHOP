@@ -1,10 +1,13 @@
 
 from django.http import Http404
-from .serializers import ProductSerializer, CategorySerializer, ProductImageSerializer
-from .models import Product, Category, ProductImage
+from rest_framework import status
+from .serializers import ProductSerializer, CategorySerializer, ProductImageSerializer, ProductReviewSerializer
+from .models import Product, Category, ProductImage, ProductReview
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 from rest_framework.decorators import api_view
 from django.db.models import Q
@@ -106,3 +109,64 @@ def search(request):
     products = Product.objects.filter(base_query)
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
+
+class ProductReviewView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def post(self, request, product_slug):
+        try:
+            product = Product.objects.get(slug=product_slug)
+        except Product.DoesNotExist:
+            raise Http404
+        
+        # Check if a review already exists for this product and user
+        existing_review = ProductReview.objects.filter(product=product, user=request.user).first()
+
+        if existing_review:
+            return Response({'error': 'You have already reviewed this product.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = ProductReviewSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.validated_data['user'] = request.user
+            serializer.validated_data['product'] = product
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request, product_slug, review_id=None):
+        if review_id:
+            # Handle GET request for a specific review (with review_id)
+            try:
+                product = Product.objects.get(slug=product_slug)
+                review = ProductReview.objects.get(id=review_id, product=product, user=request.user)
+                serializer = ProductReviewSerializer(review)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except Product.DoesNotExist:
+                return Response({'error': 'Product not found.'}, status=status.HTTP_404_NOT_FOUND)
+            except ProductReview.DoesNotExist:
+                return Response({'error': 'Review not found or unauthorized.'}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            # Handle GET request for all reviews of a product
+            try:
+                product = Product.objects.get(slug=product_slug)
+                reviews = ProductReview.objects.filter(product=product)
+                serializer = ProductReviewSerializer(reviews, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except Product.DoesNotExist:
+                return Response({'error': 'Product not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    def delete(request, product_slug, review_id):
+        try:
+            product = Product.objects.get(slug=product_slug)
+        except Product.DoesNotExist:
+            raise Http404
+
+        try:
+            review = ProductReview.objects.get(id=review_id, product=product, user=request.user)
+        except ProductReview.DoesNotExist:
+            return Response({'error': 'Review not found or unauthorized.'}, status=status.HTTP_404_NOT_FOUND)
+
+        if review.delete():
+            return Response({'error': 'Review deleted successfully.'}, status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response({'error': 'An error occurred while deleting the review.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

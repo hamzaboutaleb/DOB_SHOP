@@ -5,6 +5,9 @@ from io import BytesIO
 from PIL import Image
 from django.core.files import File
 
+from django.db.models import Avg
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 class Category(models.Model):
     """ define category model """
     name = models.CharField(max_length=255)
@@ -62,7 +65,10 @@ class Product(models.Model):
         elif self.thumbnail:
             return self.thumbnail
         return ''
-
+    
+    def average_rating(self):
+        return ProductReview.objects.filter(product=self).aggregate(Avg('rating'))['rating__avg']
+    
 class ProductImage(models.Model):
     """Additional images for a product instance"""
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
@@ -100,3 +106,23 @@ class ProductImage(models.Model):
         img.save(thumb_io, 'JPEG', quality=85)
         thumbnail = File(thumb_io, name=image.name)
         return thumbnail
+
+from order.models import CustomUser
+class ProductReview(models.Model):
+    """Product review model"""
+    user = models.ForeignKey(CustomUser, related_name='reviews', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,related_name='reviews', on_delete=models.CASCADE)
+    rating = models.PositiveSmallIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Review'
+        verbose_name_plural = 'Reviews'
+        unique_together = ('product', 'user')
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.product.name} Review"
+    
+    def get_rating(self):
+        return self.rating
