@@ -3,6 +3,7 @@ import userIcon from "./../../assets/svg/user-icon.svg";
 import shoppingCartIcon from "./../../assets/svg/shoppin-cart-icon.svg";
 import SearchInput from "../searchInput/SearchInput";
 import Logo from "../logo/Logo";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -10,9 +11,9 @@ function Header() {
       <Logo />
       <SearchInput />
       <div className={styles["header__actions"]}>
-        <a href="#">
+        <Link to="/login">
           <img src={userIcon} alt="" />
-        </a>
+        </Link>
         <a href="#">
           <img src={shoppingCartIcon} alt="" />
         </a>

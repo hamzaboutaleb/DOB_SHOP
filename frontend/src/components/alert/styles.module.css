@@ -1,0 +1,18 @@
+.alert {
+  padding: 16px 24px;
+  font-size: 1.4rem;
+  text-transform: capitalize;
+  border-radius: 4px;
+}
+.alert.primary {
+  background-color: #73aafe;
+  color: #073477;
+}
+.alert.error {
+  color: #67040c;
+  background-color: #ea868f;
+}
+.alert.success {
+  color: #065a33;
+  background-color: #9ee9c6;
+}

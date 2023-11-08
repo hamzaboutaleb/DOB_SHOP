@@ -4,13 +4,13 @@ import styles from "./styles.module.css";
 import { toImage } from "../../utlis/toImage";
 
 function ProductItem({ product }) {
-  const { images, name, price } = product;
-  const image = toImage(images[0].image);
-  const link = `/product`;
+  const { slug, primary_image: image, name, price } = product;
+  const imageLink = toImage(image);
+  const link = `/product/${slug}`;
   return (
     <article className={styles.product}>
       <Link to={link} className={styles.link}>
-        <img className={styles.img} src={image} alt="" />
+        <img className={styles.img} src={imageLink} alt="" />
       </Link>
       <h3 className={styles.title}>
         <Link to={link} className={styles.link}>
