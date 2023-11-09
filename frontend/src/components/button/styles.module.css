@@ -22,6 +22,19 @@
 .primary:hover {
   background-color: var(--primary-color-orange-1);
 }
+.primary-1 {
+  background-color: var(--primary-color-orange);
+  font-size: 1.5rem;
+  padding: 12px 8px;
+  width: 50%;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.primary-1:hover {
+  background-color: var(--primary-color-orange-1);
+}
 .large {
   font-size: 1.8rem;
   font-weight: 500;

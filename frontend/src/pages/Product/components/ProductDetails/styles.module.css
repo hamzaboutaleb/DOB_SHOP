@@ -1,0 +1,96 @@
+.product {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 5.2rem;
+}
+
+.thumbnail img {
+  width: 100%;
+}
+.imagesList {
+  display: flex;
+  gap: 1rem;
+}
+.imagesList img {
+  width: 100px;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.details {
+  background-color: var(--grey-color-0);
+  padding: 3.2rem 3.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+.details .title {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 2rem;
+  text-align: start;
+}
+.details .price h3,
+.details .quantity h3,
+.description h3 {
+  font-size: 2.2rem;
+  text-transform: capitalize;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 12px;
+  color: var(--grey-color-2);
+}
+.details .price span {
+  font-size: 2.5rem;
+  line-height: 0;
+  color: var(--primary-color-orange);
+}
+.informationItem {
+  margin-bottom: 8px;
+}
+.informationItem h3 {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+.informationItem h3::after {
+  content: " : ";
+}
+.description p,
+.informationItem p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+.informationItem p,
+.informationItem h3 {
+  display: inline;
+}
+.quantityForm {
+  display: flex;
+  gap: 8px;
+}
+
+.quantityForm button {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background-color: white;
+  color: #000;
+  font-size: 2.2rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.quantityForm button:hover {
+  background-color: var(--primary-color-green);
+  color: #fff;
+}
+.quantityForm h4 {
+  font-size: 1.6rem;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin: 0;
+  background-color: #fff;
+}
