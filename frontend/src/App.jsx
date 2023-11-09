@@ -4,11 +4,9 @@ import AppLayout from "./layouts/AppLayout";
 import Home from "./pages/Home/Home";
 import AuthLayout from "./layouts/AuthLayout";
 import Login from "./pages/Login/Login";
-import GuestRoute from "./components/authComponents/GuestRoute";
 import Register from "./pages/Register/Register";
 import Product from "./pages/Product/Product";
-import { useEffect } from "react";
-import { getBySlug } from "./services/productsApi";
+import GuestRoute from "./components/authComponents/GuestRoute";
 const route = createBrowserRouter([
   {
     path: "/",
@@ -48,11 +46,6 @@ const route = createBrowserRouter([
 ]);
 
 function App() {
-  useEffect(() => {
-    getBySlug("women-slippers").then((data) => {
-      console.log(data);
-    });
-  }, []);
   return <RouterProvider router={route} />;
 }
 

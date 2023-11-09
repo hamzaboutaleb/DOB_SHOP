@@ -1,0 +1,9 @@
+.review {
+  width: 70%;
+  margin: auto;
+  padding: 3.2rem;
+}
+.title {
+  font-size: 4.8rem;
+  font-weight: 500;
+}

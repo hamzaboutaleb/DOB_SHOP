@@ -10,6 +10,12 @@ export function getAuth() {
   return null;
 }
 
+export function getJWT() {
+  const token = localStorage.getItem("token");
+
+  return token;
+}
+
 export function isLoggedIn() {
   const auth = getAuth();
 
