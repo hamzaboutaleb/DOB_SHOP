@@ -6,7 +6,6 @@ import { toImage } from "../../../../utlis/toImage";
 import styles from "./styles.module.css";
 
 function ProductDetails({ data, isLoading }) {
-  console.log(isLoading);
   if (isLoading) return <Loader />;
   const images = data.images.slice(0, 3);
   return (
@@ -24,7 +23,7 @@ function ProductDetails({ data, isLoading }) {
       <div className={styles.details}>
         <div className={styles.header}>
           <div className={styles.title}>{data.name}</div>
-          <Rating value={2} />
+          <Rating value={data.average_rating} />
         </div>
         <div className={styles.price}>
           <h3>Price</h3>

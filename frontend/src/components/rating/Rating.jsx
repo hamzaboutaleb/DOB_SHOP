@@ -3,7 +3,6 @@ import emptyStar from "./../../assets/svg/empty_star.svg";
 import styles from "./styles.module.css";
 import { useState } from "react";
 function Rating({ value, onClick }) {
-  const [rate, setRate] = useState(value);
   const [hoverRate, setHoverRate] = useState(null);
 
   function handleMouseOver(i) {
@@ -12,6 +11,9 @@ function Rating({ value, onClick }) {
   function handleMouseOut() {
     setHoverRate(null);
   }
+  function handleOnClick(i) {
+    onClick(i + 1);
+  }
 
   const filled = new Array(5).fill(0);
 
@@ -19,10 +21,10 @@ function Rating({ value, onClick }) {
     <div onMouseLeave={() => handleMouseOut()} className="rating">
       <Stars
         starsList={filled}
-        rate={rate}
+        rate={value}
         hover={hoverRate}
         onMouseEnter={onClick && handleMouseOver}
-        onClick={onClick}
+        onClick={handleOnClick}
       />
     </div>
   );
@@ -41,7 +43,7 @@ function Stars({
         return (
           <img
             onMouseEnter={() => onMouseEnter(i + 1)}
-            onClick={() => onClick(rate)}
+            onClick={() => onClick(i)}
             src={filledStar}
             alt="filled star"
             className={styles.star}
@@ -51,7 +53,7 @@ function Stars({
       return (
         <img
           onMouseEnter={() => onMouseEnter(i + 1)}
-          onClick={() => onClick(rate)}
+          onClick={() => onClick(i)}
           src={emptyStar}
           alt="star"
           key={i}
@@ -64,7 +66,7 @@ function Stars({
       return (
         <img
           onMouseEnter={() => onMouseEnter(i + 1)}
-          onClick={() => onClick(rate)}
+          onClick={() => onClick(i)}
           src={filledStar}
           alt="filled star"
           className={styles.star}
@@ -74,7 +76,7 @@ function Stars({
     return (
       <img
         onMouseEnter={() => onMouseEnter(i + 1)}
-        onClick={() => onClick(rate)}
+        onClick={() => onClick(i)}
         src={emptyStar}
         alt="star"
         key={i}

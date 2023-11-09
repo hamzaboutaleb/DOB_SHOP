@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+.form textarea {
+  border: 0;
+  background-color: var(--grey-color-3);
+  border-radius: 4px;
+  width: 100%;
+  display: block;
+  font-size: 1.8rem;
+  padding: 4px;
+}
+.form textarea:focus {
+  outline: 0;
+}
