@@ -33,9 +33,11 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ("id", "name", "products", "get_absolute_url")
 
 class ProductReviewSerializer(serializers.ModelSerializer):
+    username = serializers.ReadOnlyField(source='user.username')
+    
     class Meta:
         model = ProductReview
-        fields = ['id', 'rating', 'description', 'created_at']
+        fields = ['id', 'rating', 'description', 'username', 'created_at']
         read_only_fields = ['product', 'user']
 
     def create(self, validated_data):
