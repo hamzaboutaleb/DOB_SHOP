@@ -1,4 +1,4 @@
-import Alert from "../../../../components/alert/Alert";
+import Alert from "../alert/Alert";
 import styles from "./styles.module.css";
 function NoProduct({ query }) {
   let error =

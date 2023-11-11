@@ -1,9 +1,9 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import ProductItem from "../../../../components/productItem/ProductItem";
+import ProductItem from "../productItem/ProductItem";
 import styles from "./styles.module.css";
-import { searchConifg } from "../../../../configs/configs";
+import { searchConifg } from "../../configs/configs";
 import NoProduct from "../NoProduct/noProduct";
-import Loader from "../../../../components/loader/Loader";
+import Loader from "../loader/Loader";
 function ProductsList({ products, isLoading }) {
   const [searchParams] = useSearchParams();
   const { query } = useParams();
@@ -13,7 +13,7 @@ function ProductsList({ products, isLoading }) {
     (page - 1) * searchConifg.productPerPage + searchConifg.productPerPage;
 
   if (isLoading) return <Loader />;
-
+  console.log(products);
   if (products.length === 0) return <NoProduct query={query} />;
 
   const filtredProduct = products.slice(start, end);

@@ -4,9 +4,8 @@ import { search } from "../../services/productsApi";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useState } from "react";
-import { useEffect } from "react";
 import Pagination from "../../components/pagination/Pagination";
-import ProductsList from "./components/ProductsList/ProductsList";
+import ProductsList from "../../components/ProductsList/ProductsList";
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,14 +15,10 @@ function Search() {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(300);
 
-  const { data, isLoading, refetch } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["search", query, min, max],
     queryFn: () => search(query, min, max),
   });
-
-  useEffect(() => {
-    refetch();
-  }, [refetch, minPrice, maxPrice]);
 
   function handleFilter(e) {
     e.preventDefault();
