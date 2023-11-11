@@ -1,0 +1,36 @@
+.quantity h3 {
+  font-size: 2.2rem;
+  text-transform: capitalize;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 12px;
+  color: var(--grey-color-2);
+}
+.quantityForm {
+  display: flex;
+  gap: 8px;
+}
+
+.quantityForm button {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background-color: white;
+  color: #000;
+  font-size: 2.2rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.quantityForm button:hover {
+  background-color: var(--primary-color-green);
+  color: #fff;
+}
+.quantityForm h4 {
+  font-size: 1.6rem;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin: 0;
+  background-color: #fff;
+}

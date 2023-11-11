@@ -21,7 +21,7 @@ function Hero() {
             here.
           </p>
         </div>
-        <Button className={["primary", "large"]}>
+        <Button href="/register" className={["primary", "large"]}>
           <span>shop now</span> <i className="fa-solid fa-arrow-right"></i>
         </Button>
       </div>

@@ -11,39 +11,34 @@ function Rating({ value, onClick }) {
   function handleMouseOut() {
     setHoverRate(null);
   }
-  function handleOnClick(i) {
-    onClick(i + 1);
-  }
 
   const filled = new Array(5).fill(0);
 
   return (
-    <div onMouseLeave={() => handleMouseOut()} className="rating">
+    <div onMouseLeave={() => handleMouseOut()} className={styles.rating}>
       <Stars
         starsList={filled}
         rate={value}
         hover={hoverRate}
         onMouseEnter={onClick && handleMouseOver}
-        onClick={handleOnClick}
+        onClick={onClick}
       />
     </div>
   );
 }
 
-function Stars({
-  rate,
-  hover,
-  starsList,
-  onMouseEnter = () => {},
-  onClick = () => {},
-}) {
+function Stars({ rate, hover, starsList, onMouseEnter = () => {}, onClick }) {
+  function handleClick(i) {
+    if (onClick) onClick(i + 1);
+  }
+
   if (hover != null) {
     return starsList.map((el, i) => {
       if (i + 1 <= hover)
         return (
           <img
             onMouseEnter={() => onMouseEnter(i + 1)}
-            onClick={() => onClick(i)}
+            onClick={() => handleClick(i)}
             src={filledStar}
             alt="filled star"
             className={styles.star}
@@ -53,7 +48,7 @@ function Stars({
       return (
         <img
           onMouseEnter={() => onMouseEnter(i + 1)}
-          onClick={() => onClick(i)}
+          onClick={() => handleClick(i)}
           src={emptyStar}
           alt="star"
           key={i}
@@ -66,17 +61,16 @@ function Stars({
       return (
         <img
           onMouseEnter={() => onMouseEnter(i + 1)}
-          onClick={() => onClick(i)}
+          onClick={() => handleClick(i)}
           src={filledStar}
           alt="filled star"
-          className={styles.star}
           key={i}
         />
       );
     return (
       <img
         onMouseEnter={() => onMouseEnter(i + 1)}
-        onClick={() => onClick(i)}
+        onClick={() => handleClick(i)}
         src={emptyStar}
         alt="star"
         key={i}
