@@ -30,7 +30,7 @@ class CategorySerializer(serializers.ModelSerializer):
     products =  ProductSerializer(many=True)
     class Meta:
         model = Category
-        fields = ("id", "name", "products", "get_absolute_url")
+        fields = ("id", "name", "slug", "products", "get_absolute_url")
 
 class ProductReviewSerializer(serializers.ModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
