@@ -21,7 +21,7 @@ function Category() {
           <ProductsList isLoading={isLoading} products={data.products} />
         )}
 
-        <Pagination totalProduct={data?.length || 1} />
+        <Pagination totalProduct={data?.products.length || 1} />
       </div>
     </div>
   );

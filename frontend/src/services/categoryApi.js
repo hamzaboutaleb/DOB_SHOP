@@ -11,3 +11,12 @@ export async function getProductByCategory(category) {
     );
   }
 }
+
+export async function getCategories() {
+  try {
+    const resp = await apiClient.get("/categories");
+    return resp.data;
+  } catch (error) {
+    throw new Error("can't fetch categories");
+  }
+}
