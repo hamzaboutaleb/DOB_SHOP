@@ -82,16 +82,20 @@ class OrderListView(ListAPIView):
 
     def get_queryset(self):
         # Define the queryset to retrieve orders and related order items
-        queryset = Order.objects.all().prefetch_related('items')
+        #queryset = Order.objects.all().prefetch_related('items')
+
+        #Filter orders based on the currently authenticated user
+        queryset = Order.objects.filter(user=self.request.user).prefetch_related('items')
         return queryset
 
 class AddToCartView(APIView):
     """add items to order"""
     permission_classes = [IsAuthenticated]
+
     def post(self, request):
         product_id = request.data.get('product')  # Get the product ID from the request data
-        quantity = request.data.get('quantity')
-
+        action = request.data.get('action')  # Get the action ('up' or 'down')
+        
         try:
             product = Product.objects.get(id=product_id)
         except Product.DoesNotExist:
@@ -101,34 +105,45 @@ class AddToCartView(APIView):
         user = self.request.user
         order, created = Order.objects.get_or_create(user=user, status='pending')
 
-        price = product.price  # Get the price from the product model
-
-        # Check if the product is already in the cart, update quantity if so
+        # Check if the product is already in the cart
         existing_item = order.items.filter(product=product).first()
-        if existing_item:
-            existing_item.quantity += quantity
-            existing_item.save()
-        else:
-            # Create a new order item with product details
-            OrderItem.objects.create(order=order, product=product, quantity=quantity, price=price)
         
+        if action == 'up':
+            # Increase quantity by 1 if the product is in the cart, otherwise, create a new item
+            if existing_item:
+                existing_item.quantity += 1
+                existing_item.save()
+            else:
+                price = product.price
+                OrderItem.objects.create(order=order, product=product, quantity=1, price=price)
+        elif action == 'down':
+            # Decrease quantity by 1 if the product is in the cart and quantity is greater than 1
+            if existing_item and existing_item.quantity > 1:
+                existing_item.quantity -= 1
+                existing_item.save()
+            elif existing_item and existing_item.quantity == 1:
+                # If quantity is 1, delete the item
+                existing_item.delete()
+
         # Update the total amount for the order
         order.total_amount = sum(item.total_price() for item in order.items.all())
         order.save()
 
-        return Response({'message': 'Product added to cart successfully'}, status=status.HTTP_201_CREATED)
-
+        return Response({'message': 'Product quantity updated successfully'}, status=status.HTTP_200_OK)
 
 class RemoveFromCartView(APIView):
     """delete items from the cart"""
     permission_classes = [IsAuthenticated]
-    def delete(self, request, order_item_id):
+    def delete(self, request, order_id, order_item_id):
         try:
+            order = Order.objects.get(id=order_id)
             order_item = OrderItem.objects.get(id=order_item_id)
+        except Order.DoesNotExist:
+            return Response({'error': 'Order not found'}, status=status.HTTP_404_NOT_FOUND)
         except OrderItem.DoesNotExist:
-            return Response({'message': 'Order item not found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': 'Order item not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        order = order_item.order
+        order_item.order
 
         # Remove the order item from the cart
         order_item.delete()

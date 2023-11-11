@@ -16,6 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
         password=validated_data['password']
         )
         return user
+    
+
 
 class OrderItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer() 
