@@ -9,7 +9,6 @@ export function useLogin(username, password) {
   const auth = useAuth();
   const navigate = useNavigate();
   async function onSubmit() {
-    console.log(username.isValid, password.isValid);
     if (!username.isValid || !password.isValid) return;
     try {
       setError(null);

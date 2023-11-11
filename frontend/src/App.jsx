@@ -7,6 +7,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Product from "./pages/Product/Product";
 import GuestRoute from "./components/authComponents/GuestRoute";
+import Error from "./components/error/Error";
 const route = createBrowserRouter([
   {
     path: "/",
@@ -19,6 +20,7 @@ const route = createBrowserRouter([
       {
         path: "/product/:slug",
         element: <Product />,
+        errorElement: <Error />,
       },
     ],
   },
