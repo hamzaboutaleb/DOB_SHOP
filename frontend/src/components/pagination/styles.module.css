@@ -1,0 +1,20 @@
+.pagination {
+  display: flex;
+  gap: 4px;
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  width: fit-content;
+}
+.pagination div {
+  text-decoration: none;
+  color: #000;
+  padding: 12px;
+  background-color: #fbfbfb;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.pagination div.active {
+  background-color: var(--primary-color-orange);
+  color: #fff;
+}

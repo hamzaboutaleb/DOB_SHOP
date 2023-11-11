@@ -8,6 +8,7 @@ import Register from "./pages/Register/Register";
 import Product from "./pages/Product/Product";
 import GuestRoute from "./components/authComponents/GuestRoute";
 import Error from "./components/error/Error";
+import Search from "./pages/Search/Search";
 const route = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +22,10 @@ const route = createBrowserRouter([
         path: "/product/:slug",
         element: <Product />,
         errorElement: <Error />,
+      },
+      {
+        path: "/search/:query",
+        element: <Search />,
       },
     ],
   },

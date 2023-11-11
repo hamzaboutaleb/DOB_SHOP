@@ -1,6 +1,7 @@
 .footer {
   padding: 3.2rem;
-  background-color: #cecece;
+  background-color: rgb(44, 44, 44);
+  color: #fff;
 }
 .box {
   display: grid;
@@ -24,7 +25,7 @@
   gap: 12px;
 }
 .link a {
-  color: #3b3b3b;
+  color: #fff;
   font-size: 1.6rem;
   text-decoration: none;
 }
@@ -36,7 +37,7 @@
 }
 .contact a {
   text-decoration: none;
-  color: #000;
+  color: #fff;
 }
 .contactSocialNet {
   display: flex;

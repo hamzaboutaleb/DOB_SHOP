@@ -15,3 +15,19 @@ export async function getBySlug(slug) {
     }
   }
 }
+
+export async function search(query, min, max) {
+  const body = {};
+  if (query) {
+    body.query = query;
+  }
+  if (min) {
+    body.min_price = min;
+  }
+  if (max) {
+    body.max_price = max;
+  }
+  const res = await apiClient.post("/products/search/", body);
+  console.log(query, min, max);
+  return res.data;
+}
