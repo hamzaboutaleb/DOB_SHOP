@@ -1,0 +1,8 @@
+.resultCount {
+  font-size: 2rem;
+}
+.resultList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.2rem;
+}
