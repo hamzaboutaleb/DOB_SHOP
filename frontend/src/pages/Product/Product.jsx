@@ -1,19 +1,14 @@
-import { useParams } from "react-router-dom";
 import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
 import Loader from "../../components/loader/Loader";
-import { useQuery } from "@tanstack/react-query";
-import { getBySlug } from "../../services/productsApi";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Review from "./components/Review/Review";
+import { useGetProduct } from "./hooks/useGetProduct";
 
 function Product() {
-  const { slug } = useParams();
-  const { data, isLoading: isLoadingProduct } = useQuery({
-    queryKey: ["prodict", slug],
-    queryFn: () => getBySlug(slug),
-  });
+  const { data, isLoadingProduct } = useGetProduct();
 
   if (isLoadingProduct) return <Loader />;
+
   const breadcrubmItems = [
     {
       name: "Home",

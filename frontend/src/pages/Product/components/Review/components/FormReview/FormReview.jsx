@@ -15,17 +15,19 @@ function FormReview({ refetch }) {
     try {
       setError(null);
       await post(slug, rating, desc);
-      refetch();
       setRating(0);
-      desc("");
+      setDesc("");
     } catch (error) {
-      console.log("test");
       setError(error);
     }
+    refetch();
   }
   return (
     <div className={`${styles.form} margin-b-5`}>
       <Alert type="error">{error}</Alert>
+      <Alert type="success">
+        {error === "ok" ? "Thank You for Your Review!" : null}
+      </Alert>
       <Rating value={rating} onClick={setRating} />
       <textarea
         name=""

@@ -1,0 +1,20 @@
+.error {
+  font-size: 25rem;
+  font-weight: 900;
+}
+.error span:nth-child(1) {
+  color: var(--primary-color-orange);
+}
+.error span:nth-child(2) {
+  color: var(--primary-color-green);
+}
+.error span:nth-child(3) {
+  color: var(--primary-color-orange);
+}
+
+.errorMessage {
+  font-size: 8rem;
+  letter-spacing: -1px;
+  text-transform: capitalize;
+  color: #242424;
+}

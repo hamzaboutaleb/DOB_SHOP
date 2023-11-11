@@ -4,7 +4,6 @@ import Loader from "../../../../../../components/loader/Loader";
 
 function Reviews({ isLoading, data }) {
   if (isLoading) return <Loader />;
-  console.log(data);
   if (!data) return null;
   return (
     <div className={styles.list}>

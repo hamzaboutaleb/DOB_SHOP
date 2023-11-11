@@ -1,8 +1,8 @@
-import Button from "../../../../components/button/Button";
 import Grid from "../../../../components/grid/Grid";
 import Loader from "../../../../components/loader/Loader";
 import Rating from "../../../../components/rating/Rating";
 import { toImage } from "../../../../utlis/toImage";
+import QuantityForm from "../QuantityForm/QuantityForm";
 import styles from "./styles.module.css";
 
 function ProductDetails({ data, isLoading }) {
@@ -29,17 +29,7 @@ function ProductDetails({ data, isLoading }) {
           <h3>Price</h3>
           <span>{data.price}Dhs</span>
         </div>
-        <div className={styles.quantity}>
-          <h3>quantity</h3>
-          <div className={styles.quantityForm}>
-            <button>-</button>
-            <h4>0</h4>
-            <button>+</button>
-          </div>
-        </div>
-        <Button type="button" className={["btn", "primary-1"]}>
-          Add To Cart
-        </Button>
+        <QuantityForm product={data} />
         <div className={styles.description}>
           <h3>Description</h3>
           <p>{data.description}</p>

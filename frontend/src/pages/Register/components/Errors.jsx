@@ -1,7 +1,6 @@
 import Alert from "../../../components/alert/Alert";
 
 function Errors({ errors }) {
-  console.log(errors);
   if (errors.length == 0) return null;
   return (
     <Alert type="error">
