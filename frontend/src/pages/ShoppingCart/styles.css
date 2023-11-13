@@ -1,0 +1,109 @@
+.orders {
+  width: 80%;
+  margin: 9rem auto;
+}
+.title {
+  font-size: 2.6rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.name a {
+  text-decoration: none;
+  color: #000;
+}
+.name a:hover {
+  color: var(--primary-color-orange-1);
+}
+.orderList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.orderItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+  border-bottom: 1px solid #e2e2e2ab;
+  padding: 5px;
+}
+.orderItem .img img {
+  width: 100%;
+  border-radius: 4px;
+  object-fit: fill;
+}
+.orderItem .img {
+  flex-basis: 9rem;
+}
+.info {
+  flex: 5;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.info .name {
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.form {
+  display: flex;
+  gap: 1rem;
+}
+.form .quantity {
+  display: grid;
+  width: 30px;
+  height: 100%;
+  font-size: 2rem;
+  font-weight: 600;
+  place-items: center;
+}
+.action {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3px 0;
+  align-items: start;
+}
+.action .price {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #515151;
+  text-transform: uppercase;
+}
+.checkout {
+  padding: 1rem 4rem;
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.total h3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.btn-checkout {
+  width: 50%;
+  display: block;
+}
+.btn-secondary {
+  color: #727272;
+  background-color: #f1f1f1;
+  padding: 0.6rem 1rem;
+  font-size: 1.6rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  background-color: var(--primary-color-orange);
+  color: #fff;
+}
+.delete-icon {
+  width: 20px;
+}

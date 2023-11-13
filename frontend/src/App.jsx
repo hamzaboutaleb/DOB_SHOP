@@ -10,6 +10,8 @@ import GuestRoute from "./components/authComponents/GuestRoute";
 import Error from "./components/error/Error";
 import Search from "./pages/Search/Search";
 import Category from "./pages/Category/Category";
+import ShoppingCart from "./pages/ShoppingCart/ShoppingCart";
+import { getOrders } from "./services/orderApi";
 const route = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +34,10 @@ const route = createBrowserRouter([
         path: "/category/:slug",
         element: <Category />,
         errorElement: <Error />,
+      },
+      {
+        path: "/cart",
+        element: <ShoppingCart />,
       },
     ],
   },
@@ -59,6 +65,7 @@ const route = createBrowserRouter([
 ]);
 
 function App() {
+  getOrders();
   return <RouterProvider router={route} />;
 }
 

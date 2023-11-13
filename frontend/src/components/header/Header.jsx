@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getCategories } from "../../services/categoryApi";
 import Loader from "../loader/Loader";
+import ForUser from "../authComponents/ForUser";
+import ForGuest from "../authComponents/ForGuest";
 
 function Header() {
   const { data, isLoading } = useQuery({
@@ -39,12 +41,16 @@ function Header() {
       </div>
       <SearchInput />
       <div className={styles["header__actions"]}>
-        <Link to="/login">
-          <img src={userIcon} alt="" />
-        </Link>
-        <a href="#">
-          <img src={shoppingCartIcon} alt="" />
-        </a>
+        <ForGuest>
+          <Link to="/login">
+            <img src={userIcon} alt="" />
+          </Link>
+        </ForGuest>
+        <ForUser>
+          <Link to="/cart">
+            <img src={shoppingCartIcon} alt="" />
+          </Link>
+        </ForUser>
       </div>
     </header>
   );
