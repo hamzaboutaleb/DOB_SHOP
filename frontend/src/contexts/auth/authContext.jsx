@@ -5,7 +5,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import { isLoggedIn, setAuth } from "../../utlis/auth";
+import { clearAuth, isLoggedIn, setAuth } from "../../utlis/auth";
+import { logout } from "../../services/authenticationApi";
 
 const authContext = createContext({});
 export function AuthProvider({ children }) {
@@ -22,11 +23,18 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
+  async function logoutFn() {
+    await logout();
+    clearAuth();
+    setIsAuth(false);
+  }
+
   return (
     <authContext.Provider
       value={{
         isAuth,
         setCredentials,
+        logout: logoutFn,
       }}
     >
       {children}

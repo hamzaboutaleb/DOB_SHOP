@@ -1,13 +1,13 @@
 import { apiClient } from "./../configs/configs";
 
 export async function getAll() {
-  const response = await apiClient.get("/products/");
+  const response = await apiClient().get("/products/");
   return response?.data;
 }
 
 export async function getBySlug(slug) {
   try {
-    const response = await apiClient.get(`/products/${slug}`);
+    const response = await apiClient().get(`/products/${slug}/`);
     return response.data;
   } catch ({ response }) {
     if (response.status == 404) {
@@ -27,7 +27,7 @@ export async function search(query, min, max) {
   if (max) {
     body.max_price = max;
   }
-  const res = await apiClient.post("/products/search/", body);
+  const res = await apiClient().post("/products/search/", body);
   console.log(query, min, max);
   return res.data;
 }

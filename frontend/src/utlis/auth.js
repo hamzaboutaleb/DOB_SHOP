@@ -12,7 +12,6 @@ export function getAuth() {
 
 export function getJWT() {
   const token = localStorage.getItem("token");
-
   return token;
 }
 
@@ -20,4 +19,9 @@ export function isLoggedIn() {
   const auth = getAuth();
 
   return auth !== null;
+}
+
+export function clearAuth() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("username");
 }

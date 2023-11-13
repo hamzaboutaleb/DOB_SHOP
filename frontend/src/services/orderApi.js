@@ -1,15 +1,11 @@
 import { apiClient } from "../configs/configs";
 
 export async function getOrders() {
-  try {
-    const resp = await apiClient.get("/order-list");
-    return resp;
-  } catch (error) {
-    throw new Error(error.response.data);
-  }
+  const resp = await apiClient().get("/order-list/");
+  return resp;
 }
 export async function addToCart({ product, action = "up", quantity = 1 }) {
-  const resp = await apiClient.post("/add-to-cart/", {
+  const resp = await apiClient().post("/add-to-cart/", {
     product,
     action,
     quantity,
@@ -17,14 +13,14 @@ export async function addToCart({ product, action = "up", quantity = 1 }) {
   return resp.data;
 }
 export async function deleteOrderItem({ orderId, orderItemId }) {
-  const resp = await apiClient.delete(
+  const resp = await apiClient().delete(
     `/remove-from-cart/${orderId}/${orderItemId}/`
   );
   return resp.data;
 }
 
 export async function increaseQuantity(product) {
-  const resp = await apiClient.post("/add-to-cart/", {
+  const resp = await apiClient().post("/add-to-cart/", {
     product,
     action: "up",
   });
@@ -32,7 +28,7 @@ export async function increaseQuantity(product) {
   return resp.data;
 }
 export async function decreaseQuantity(product) {
-  const resp = await apiClient.post("/add-to-cart/", {
+  const resp = await apiClient().post("/add-to-cart/", {
     product,
     action: "down",
   });

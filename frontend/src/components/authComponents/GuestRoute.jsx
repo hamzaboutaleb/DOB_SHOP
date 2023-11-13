@@ -12,7 +12,6 @@ function GuestRoute({ children }) {
   }, [isAuth, navigate]);
 
   if (isAuth) return null;
-  console.log("hey");
 
   return children;
 }

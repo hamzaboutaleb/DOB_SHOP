@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import Button from "../button/Button";
 import styles from "./styles.module.css";
 import { toImage } from "../../utlis/toImage";
+import { addToCart } from "../../services/orderApi";
 
 function ProductItem({ product }) {
-  const { slug, primary_image: image, name, price } = product;
+  const { id, slug, primary_image: image, name, price } = product;
   const imageLink = toImage(image);
   const link = `/product/${slug}`;
   return (
@@ -19,7 +20,12 @@ function ProductItem({ product }) {
       </h3>
       <div className={styles.actions}>
         <span className={styles.price}>{price} Dhs</span>
-        <Button className={["primary", "small"]}>add to cart</Button>
+        <Button
+          onClick={() => addToCart({ product: id })}
+          className={["primary", "small"]}
+        >
+          add to cart
+        </Button>
       </div>
     </article>
   );

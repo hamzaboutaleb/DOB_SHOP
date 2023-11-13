@@ -11,7 +11,6 @@ import Error from "./components/error/Error";
 import Search from "./pages/Search/Search";
 import Category from "./pages/Category/Category";
 import ShoppingCart from "./pages/ShoppingCart/ShoppingCart";
-import { getOrders } from "./services/orderApi";
 const route = createBrowserRouter([
   {
     path: "/",
@@ -65,7 +64,6 @@ const route = createBrowserRouter([
 ]);
 
 function App() {
-  getOrders();
   return <RouterProvider router={route} />;
 }
 

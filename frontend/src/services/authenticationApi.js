@@ -2,7 +2,7 @@ import { apiClient } from "../configs/configs";
 
 export async function requestLogin({ username, password }) {
   try {
-    const response = await apiClient.post("/login/", {
+    const response = await apiClient().post("/login/", {
       username,
       password,
     });
@@ -16,7 +16,7 @@ export async function requestLogin({ username, password }) {
 export async function requestRegister(data) {
   try {
     const body = inputToBody(data);
-    await apiClient.post("/register/", body);
+    await apiClient().post("/register/", body);
   } catch (err) {
     throw err.response.data;
   }
@@ -29,4 +29,8 @@ function inputToBody(data) {
     body[key] = data[key].value;
   }
   return body;
+}
+
+export async function logout() {
+  return await apiClient().post("/logout/");
 }
