@@ -95,7 +95,8 @@ class AddToCartView(APIView):
     def post(self, request):
         product_id = request.data.get('product')  # Get the product ID from the request data
         action = request.data.get('action')  # Get the action ('up' or 'down')
-        
+        quantity = request.data.get('quantity', 1)
+
         try:
             product = Product.objects.get(id=product_id)
         except Product.DoesNotExist:
@@ -111,17 +112,17 @@ class AddToCartView(APIView):
         if action == 'up':
             # Increase quantity by 1 if the product is in the cart, otherwise, create a new item
             if existing_item:
-                existing_item.quantity += 1
+                existing_item.quantity += quantity
                 existing_item.save()
             else:
                 price = product.price
-                OrderItem.objects.create(order=order, product=product, quantity=1, price=price)
+                OrderItem.objects.create(order=order, product=product, quantity=quantity, price=price)
         elif action == 'down':
             # Decrease quantity by 1 if the product is in the cart and quantity is greater than 1
-            if existing_item and existing_item.quantity > 1:
-                existing_item.quantity -= 1
+            if existing_item and existing_item.quantity > quantity:
+                existing_item.quantity -= quantity
                 existing_item.save()
-            elif existing_item and existing_item.quantity == 1:
+            elif existing_item and existing_item.quantity <= quantity:
                 # If quantity is 1, delete the item
                 existing_item.delete()
 

@@ -110,6 +110,7 @@ def search(request):
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
+
 class ProductReviewView(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
