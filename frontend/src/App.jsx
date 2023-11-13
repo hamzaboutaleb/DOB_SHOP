@@ -1,5 +1,7 @@
 import "./assets/styles/global.css";
+import "react-toastify/dist/ReactToastify.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import AppLayout from "./layouts/AppLayout";
 import Home from "./pages/Home/Home";
 import AuthLayout from "./layouts/AuthLayout";
@@ -64,7 +66,16 @@ const route = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={route} />;
+  return (
+    <>
+      <ToastContainer
+        position="top-center"
+        limit={2}
+        autoClose={5000}
+      ></ToastContainer>
+      <RouterProvider router={route} />
+    </>
+  );
 }
 
 export default App;

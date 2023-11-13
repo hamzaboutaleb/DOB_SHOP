@@ -9,6 +9,7 @@ import {
 } from "../../services/orderApi";
 import Loader from "../../components/loader/Loader";
 import OrderItem from "./Components/OrderItem/OrderItem";
+import Alert from "../../components/alert/Alert";
 function ShoppingCart() {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["orders"],
@@ -36,31 +37,37 @@ function ShoppingCart() {
   const order =
     data.data.filter((order) => order.status == "pending").at(0) || [];
   const id = order.id;
+  const items = order.items || [];
   return (
     <div className="container">
       <div className="orders">
         <h2 className="title">your cart</h2>
-        <div className="orderList">
-          {order.items.map((order) => (
-            <OrderItem
-              key={order.id}
-              order={order}
-              orderId={id}
-              increaseFn={increase}
-              decreaseFn={decrease}
-              deleteFn={deleteItem}
-            />
-          ))}
-        </div>
-        <div className="checkout">
-          <div className="total">
-            <h3>Total Price</h3>
-            <h3>{order.total_amount} Dhs</h3>
-          </div>
-          <Button className={["btn", "primary-1", "btn-checkout"]}>
-            CHECKOUT
-          </Button>
-        </div>
+        {items.length === 0 && <Alert type="error"> Your Cart is empty</Alert>}
+        {items.length > 0 && (
+          <>
+            <div className="orderList">
+              {items.map((order) => (
+                <OrderItem
+                  key={order.id}
+                  order={order}
+                  orderId={id}
+                  increaseFn={increase}
+                  decreaseFn={decrease}
+                  deleteFn={deleteItem}
+                />
+              ))}
+            </div>
+            <div className="checkout">
+              <div className="total">
+                <h3>Total Price</h3>
+                <h3>{order.total_amount} Dhs</h3>
+              </div>
+              <Button className={["btn", "primary-1", "btn-checkout"]}>
+                CHECKOUT
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

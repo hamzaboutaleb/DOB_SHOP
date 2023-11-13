@@ -3,6 +3,7 @@ import Button from "../../../../components/button/Button";
 import styles from "./styles.module.css";
 import { addToCart } from "../../../../services/orderApi";
 import { useState } from "react";
+import { toast } from "react-toastify";
 function QuantityForm({ product }) {
   const [quantity, setQuantity] = useState(0);
   const { id } = product;
@@ -17,6 +18,7 @@ function QuantityForm({ product }) {
     setQuantity((q) => q - 1);
   }
   function onSubmit() {
+    toast.info("Product added successfully");
     mutate({
       product: id,
       quantity: quantity,

@@ -26,7 +26,7 @@ function Footer() {
                 <a href="#">Home</a>
               </li>
               <li>
-                <a href="#">Producst</a>
+                <a href="#">Products</a>
               </li>
               <li>
                 <a href="#">About us</a>
