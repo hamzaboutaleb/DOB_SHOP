@@ -8,6 +8,14 @@ export async function getOrders() {
     throw new Error(error.response.data);
   }
 }
+export async function addToCart({ product, action = "up", quantity = 1 }) {
+  const resp = await apiClient.post("/add-to-cart/", {
+    product,
+    action,
+    quantity,
+  });
+  return resp.data;
+}
 export async function deleteOrderItem({ orderId, orderItemId }) {
   const resp = await apiClient.delete(
     `/remove-from-cart/${orderId}/${orderItemId}/`

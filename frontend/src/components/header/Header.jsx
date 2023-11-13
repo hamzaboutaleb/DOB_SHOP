@@ -15,6 +15,7 @@ function Header() {
     queryKey: ["categories"],
     queryFn: getCategories,
   });
+
   return (
     <header className={`${styles.header} container`}>
       <div className={styles.logo}>
